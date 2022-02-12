@@ -173,11 +173,11 @@ jobs:
         version: "${{ matrix.compiler }}"
         cached: ${{ steps.cache-llvm.outputs.cache-hit }}      
         
-    - name: '${{ matrix.icon }} Setup CMake'
-      uses: jwlawson/actions-setup-cmake@v1.11
-      with:
-        cmake-version: ${{ env.CMAKE_VERSION }}
-        github-api-token: ${{ secrets.GITHUB_TOKEN }}
+    #- name: '${{ matrix.icon }} Setup CMake'
+    #  uses: jwlawson/actions-setup-cmake@v1.11
+    #  with:
+    #    cmake-version: ${{ env.CMAKE_VERSION }}
+    #    github-api-token: ${{ secrets.GITHUB_TOKEN }}
         
     - name: Print compiler version
       run: clang --version
