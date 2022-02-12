@@ -56,10 +56,20 @@ jobs:
     - name: '🧰 Checkout'
       uses: actions/checkout@v2.4.0
 
+    - name: Cache LLVM and Clang
+      id: cache-llvm
+      uses: actions/cache@v2
+      with:
+        path: |
+          C:/Program Files/LLVM
+          ./llvm
+        key: llvm-${{ matrix.compiler }}
+        
     - name: Install LLVM and Clang
       uses: KyleMayes/install-llvm-action@v1
       with:
         version: "${{ matrix.compiler }}"
+        cached: ${{ steps.cache-llvm.outputs.cache-hit }}
         
     - name: Print compiler version
       run: clang --version
