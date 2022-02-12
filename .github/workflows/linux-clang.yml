@@ -61,5 +61,5 @@ jobs:
       with:
         version: "${{ matrix.compiler }}"
         
-    -name: Print compiler version
-     run: clang --version
+    - name: Print compiler version
+      run: clang --version
