@@ -1,7 +1,7 @@
 name: 'Linux Clang'
 
 env:
-  CMAKE_VERSION: '3.16.x'
+  CMAKE_VERSION: '3.21.x'
   CMAKE_BUILD_TYPE: 'Release'
   CMAKE_BUILD_PREFIX: './build'
 
@@ -73,5 +73,17 @@ jobs:
         force-version: true
         cached: ${{ steps.cache-llvm.outputs.cache-hit }}
         
+    - name: '${{ matrix.icon }} Setup CMake'
+      uses: jwlawson/actions-setup-cmake@v1.11
+      with:
+        cmake-version: ${{ env.CMAKE_VERSION }}
+        github-api-token: ${{ secrets.GITHUB_TOKEN }}
+        
     - name: Print compiler version
       run: clang --version
+      
+    - name: '🔧 Configure'
+      env:
+        CC: clang
+        CXX: clang++
+      run: cmake -S . -B ${{ env.CMAKE_BUILD_PREFIX }} -DCMAKE_BUILD_TYPE=${{ env.CMAKE_BUILD_TYPE }} -DCMAKE_MINIMUM_VERSION=${{ env.CMAKE_VERSION }} -DCMAKE_C_STANDARD=90 -DCMAKE_C_STANDARD_REQUIRED=TRUE -DCMAKE_CXX_STANDARD=98 -DCMAKE_CXX_STANDARD_REQUIRED=TRUE -DCMAKE_CXX_EXTENSIONS=OFF
