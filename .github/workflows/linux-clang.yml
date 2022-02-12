@@ -1,4 +1,4 @@
-name: ' Linux Clang'
+name: 'Linux Clang'
 
 env:
   CMAKE_VERSION: '3.16.x'
