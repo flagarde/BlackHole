@@ -165,30 +165,14 @@ jobs:
         path: |
           C:/Program Files/LLVM
           ./llvm
-        key: llvm-${{ matrix.compiler }}-linux
+        key: llvm-${{ matrix.compiler }}-clang
         
     - name: Install LLVM and Clang
       uses: KyleMayes/install-llvm-action@v1
       with:
         version: "${{ matrix.compiler }}"
         force-version: true
-        cached: ${{ steps.cache-llvm.outputs.cache-hit }}
-
-    - name: Prepare LLVM
-      if: contains(matrix.os, 'macos')
-      run: |
-        LLVM_PATH=${{ env.LLVM_PATH }}
-        LLVM_VERSION=${{ matrix.clang }}
-        ## already done inside install-llvm-action
-        # echo "PATH="$LLVM_PATH:$PATH"
-        # echo "LD_LIBRARY_PATH=$LLVM_PATH/lib/:$LD_LIBRARY_PATH" >> $GITHUB_ENV
-        # echo "DYLD_LIBRARY_PATH=$LLVM_PATH/lib/:$DYLD_LIBRARY_PATH" >> $GITHUB_ENV
-        echo "SDKROOT=$(xcrun --sdk macosx --show-sdk-path)" >> $GITHUB_ENV
-        echo "CPATH=$LLVM_PATH/lib/clang/$LLVM_VERSION/include/" >> $GITHUB_ENV
-        echo "LDFLAGS=-L$LLVM_PATH/lib" >> $GITHUB_ENV
-        echo "CPPFLAGS=-I$LLVM_PATH/include" >> $GITHUB_ENV
-        echo "CC=$LLVM_PATH/bin/clang" >> $GITHUB_ENV
-        echo "CXX=$LLVM_PATH/bin/clang++" >> $GITHUB_ENV       
+        cached: ${{ steps.cache-llvm.outputs.cache-hit }}      
         
     - name: '${{ matrix.icon }} Setup CMake'
       uses: jwlawson/actions-setup-cmake@v1.11
