@@ -11,6 +11,7 @@ on:
 
 jobs:
   build:
+    name: '🚧 Clang v${{ matrix.compiler }}'
     runs-on: macos-latest
     strategy:
       fail-fast: false
