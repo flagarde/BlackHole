@@ -69,6 +69,7 @@ jobs:
       uses: KyleMayes/install-llvm-action@v1
       with:
         version: "${{ matrix.compiler }}"
+        force-version: true
         cached: ${{ steps.cache-llvm.outputs.cache-hit }}
         
     - name: Print compiler version
