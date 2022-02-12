@@ -1,0 +1,76 @@
+name: 'MacOS Clang'
+
+env:
+  CMAKE_VERSION: '3.16.x'
+  CMAKE_BUILD_TYPE: 'Release'
+  CMAKE_BUILD_PREFIX: './build'
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build:
+    runs-on: macos-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { compiler: 3.5.0 }
+          - { compiler: 3.5.1 }
+          - { compiler: 3.5.2 }
+          - { compiler: 3.6.0 }
+          - { compiler: 3.6.1 }
+          - { compiler: 3.6.2 }
+          - { compiler: 3.7.0 }
+          - { compiler: 3.7.1 }
+          - { compiler: 3.8.0 }
+          - { compiler: 3.8.1 }
+          - { compiler: 3.9.0 }
+          - { compiler: 3.9.1 }
+          - { compiler: 4.0.0 }
+          - { compiler: 4.0.1 }
+          - { compiler: 5.0.0 }
+          - { compiler: 5.0.1 }
+          - { compiler: 5.0.2 }
+          - { compiler: 6.0.0 }
+          - { compiler: 6.0.1 }
+          - { compiler: 7.0.0 }
+          - { compiler: 7.0.1 }
+          - { compiler: 7.1.0 }
+          - { compiler: 8.0.0 }
+          - { compiler: 8.0.1 }
+          - { compiler: 9.0.0 }
+          - { compiler: 9.0.1 }
+          - { compiler: 10.0.0 }
+          - { compiler: 10.0.1 }
+          - { compiler: 11.0.0 }
+          - { compiler: 11.0.1 }
+          - { compiler: 11.1.0 }
+          - { compiler: 12.0.0 }
+          - { compiler: 12.0.1 }
+          - { compiler: 13.0.0 }
+
+    steps:
+
+    - name: '🧰 Checkout'
+      uses: actions/checkout@v2.4.0
+
+    - name: Cache LLVM and Clang
+      id: cache-llvm
+      uses: actions/cache@v2
+      with:
+        path: |
+          C:/Program Files/LLVM
+          ./llvm
+        key: llvm-${{ matrix.compiler }}
+        
+    - name: Install LLVM and Clang
+      uses: KyleMayes/install-llvm-action@v1
+      with:
+        version: "${{ matrix.compiler }}"
+        force-version: true
+        cached: ${{ steps.cache-llvm.outputs.cache-hit }}
+        
+    - name: Print compiler version
+      run: clang --version
