@@ -18,7 +18,7 @@ jobs:
       matrix:
         include:
           - { compiler: 3.5.0 }
-          - { compiler: 3.5.1 }
+          #- { compiler: 3.5.1 }
           - { compiler: 3.5.2 }
           - { compiler: 3.6.0 }
           - { compiler: 3.6.1 }
@@ -30,8 +30,8 @@ jobs:
           - { compiler: 3.9.0 }
           - { compiler: 3.9.1 }
           - { compiler: 4.0.0 }
-          - { compiler: 4.0.1 }
-          - { compiler: 5.0.0 }
+          #- { compiler: 4.0.1 }
+          #- { compiler: 5.0.0 }
           - { compiler: 5.0.1 }
           - { compiler: 5.0.2 }
           - { compiler: 6.0.0 }
@@ -40,7 +40,7 @@ jobs:
           - { compiler: 7.0.1 }
           - { compiler: 7.1.0 }
           - { compiler: 8.0.0 }
-          - { compiler: 8.0.1 }
+          #- { compiler: 8.0.1 }
           - { compiler: 9.0.0 }
           - { compiler: 9.0.1 }
           - { compiler: 10.0.0 }
