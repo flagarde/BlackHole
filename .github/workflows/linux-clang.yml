@@ -11,6 +11,7 @@ on:
 
 jobs:
   build:
+    name: '🚧 Clang v${{ matrix.compiler }}'
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -63,7 +64,7 @@ jobs:
         path: |
           C:/Program Files/LLVM
           ./llvm
-        key: llvm-${{ matrix.compiler }}
+        key: llvm-${{ matrix.compiler }}-linux
         
     - name: Install LLVM and Clang
       uses: KyleMayes/install-llvm-action@v1
